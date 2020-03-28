@@ -97,7 +97,7 @@ namespace clog
                         else
                         {
                             string json = File.ReadAllText(options.SidecarFile);
-                            sidecar = CLogSidecar.FromJson(json);
+                            sidecar = CLogSidecar.FromJson(json, false);
                             if (null == sidecar)
                                 sidecar = new CLogSidecar();
                         }

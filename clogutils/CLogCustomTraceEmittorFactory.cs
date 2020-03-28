@@ -42,11 +42,12 @@ namespace clog2text_lttng
         {
             CustomTypeDecoder = sourceCode;
         }
-
-        private  void PrepareAssemblyCompileIfNecessary()
+        public void PrepareAssemblyCompileIfNecessary()
         {
             if (null != _codeAssembly)
                 return;
+
+            Console.WriteLine("Compiling Custom Decoders");
 
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(CustomTypeDecoder);
 

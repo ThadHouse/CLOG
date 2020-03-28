@@ -161,7 +161,10 @@ namespace clogutils.ConfigFile
             {
                 if(null != (ret = TypeEncoders.FindTypeAndAdvance(encoded, traceLineMatch, ref tempIndex)))
                 {
-                    InUseTypeEncoders.AddType(ret);
+                    lock (InUseTypeEncoders)
+                    {
+                        InUseTypeEncoders.AddType(ret);
+                    }
                     index = tempIndex;
                     return ret;
                 }
@@ -177,7 +180,10 @@ namespace clogutils.ConfigFile
                 {
                     if(null != (ret = config.TypeEncoders.FindTypeAndAdvance(encoded, traceLineMatch, ref tempIndex)))
                     {
-                        InUseTypeEncoders.AddType(ret);
+                        lock (InUseTypeEncoders)
+                        {
+                            InUseTypeEncoders.AddType(ret);
+                        }
                         index = tempIndex;
                         return ret;
                     }

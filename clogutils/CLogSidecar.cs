@@ -152,7 +152,7 @@ namespace clogutils
             return me;
         }
 
-        public static CLogSidecar FromJson(string json)
+        public static CLogSidecar FromJson(string json, bool precompileDecoders)
         {
             JsonSerializerSettings s = new JsonSerializerSettings();
             s.Context = new StreamingContext(StreamingContextStates.Other, json);
@@ -169,6 +169,10 @@ namespace clogutils
                     }
                 }
             }
+
+
+            if (precompileDecoders)
+                ret.TypeEncoder.PrecompileDecoders();
 
             return ret;
         }

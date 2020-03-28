@@ -55,14 +55,13 @@ namespace clogutils
             Trace(type, msg + Environment.NewLine);
         }
 
-        public static void DecodeAndTraceToConsole(StreamWriter outputfile, CLogDecodedTraceLine bundle, string errorLine, CLogConfigurationFile config, Dictionary<string, IClogEventArg> valueBag)
+        public static string DecodeAndTraceToConsole(StreamWriter outputfile, CLogDecodedTraceLine bundle, string errorLine, CLogConfigurationFile config, Dictionary<string, IClogEventArg> valueBag)
         {
             try
             {
                 if (null == bundle)
                 {
-                    Console.WriteLine($"Invalid TraceLine : {errorLine}");
-                    return;
+                    return ($"Invalid TraceLine : {errorLine}");
                 }
 
                 StringBuilder toPrint = new StringBuilder();
@@ -128,14 +127,20 @@ namespace clogutils
                 }
 
             toPrint:
+                /*
                 if (null == outputfile)
                     Console.WriteLine(toPrint);
                 else
-                    outputfile.WriteLine(toPrint);
+                {
+                    lock(outputfile)
+                        outputfile.WriteLine(toPrint);
+                }*/
+                return toPrint.ToString();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Invalid TraceLine : {errorLine} " + e);
+                return ($"Invalid TraceLine : {errorLine}");
             }
         }
     }

@@ -35,7 +35,7 @@ namespace clog2text_windows
                 options =>
                 {
                     string sidecarJson = File.ReadAllText(options.SideCarFile);
-                    CLogSidecar textManifest = CLogSidecar.FromJson(sidecarJson);
+                    CLogSidecar textManifest = CLogSidecar.FromJson(sidecarJson, true);
                     CLogConfigurationFile config = new CLogConfigurationFile();
                     config.TypeEncoders = textManifest.TypeEncoder;
 
